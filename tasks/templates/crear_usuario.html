@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Usuario</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .alert {
+    transition: opacity 0.5s ease-out;
+        }
+
+.alert.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+    </style>
+</head>
+<body>
+
+    <!-- Navbar del Admin -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{% url 'mi-admin' %}">Barbería Clásica</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'admin_dashboard' %}">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'crear_usuario' %}">Crear Usuarios</a>
+                </li>
+            </ul>
+            <span class="navbar-text text-white mr-3">
+                {{ usuario.nombre }} <!-- Cambia esto según cómo obtengas el nombre del usuario -->
+            </span>
+            <a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a>
+        </div>
+    </nav>
+
+     <!-- Mostrar mensajes -->
+     {% if messages %}
+     <div class="mt-4">
+         {% for message in messages %}
+             <div class="alert alert-{{ message.tags }}">
+                 {{ message }}
+             </div>
+         {% endfor %}
+     </div>
+ {% endif %}
+
+ <script>
+    // Desaparecer mensajes después de 5 segundos
+    setTimeout(function() {
+        let messages = document.querySelectorAll('.alert');
+        messages.forEach(function(message) {
+            message.style.display = 'none';
+        });
+    }, 5000);  // 5000 milisegundos = 5 segundos
+</script>
+
+
+
+    <!-- Contenido principal -->
+    <div class="container mt-4">
+        <h2>Crear Nuevo Usuario</h2>
+        <form method="POST" action="{% url 'crear_usuario' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="apellido">Apellido:</label>
+                <input type="text" class="form-control" name="apellido" required>
+            </div>
+            <div class="form-group">
+                <label for="correo">Correo:</label>
+                <input type="email" class="form-control" name="correo" required>
+            </div>
+            <div class="form-group">
+                <label for="telefono">Teléfono:</label>
+                <input type="text" class="form-control" name="telefono" required>
+            </div>
+            <div class="form-group">
+                <label for="usuario">Nombre de Usuario:</label>
+                <input type="text" class="form-control" name="usuario" required>
+            </div>
+            <div class="form-group">
+                <label for="contrasena">Contraseña:</label>
+                <input type="password" class="form-control" name="contrasena" required>
+            </div>
+            <div class="form-group">
+                <label for="rol">Rol:</label>
+                <select class="form-control" name="rol" required>
+                    {% for rol in roles %}
+                    <option value="{{ rol.id_rol }}">{{ rol.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Crear Usuario</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2024 Barbería. Todos los derechos reservados.
+    </footer>
+
+</body>
+</html>

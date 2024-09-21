@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbería Clásica</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #bec4ca;
+        }
+        .card {
+            margin: 10px;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Barbería Clásica</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <!-- Aquí puedes agregar más elementos si es necesario -->
+            </ul>
+            <ul class="navbar-nav ml-auto">  <!-- Alineación a la derecha -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Corte Estilo 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Corte Clásico</h5>
+                        <p class="card-text">Un corte atemporal que nunca pasa de moda.</p>
+                        <p><strong>Tipo:</strong> Clásico</p>
+                        <p><strong>Descripción:</strong> Ideal para quienes buscan un estilo limpio y profesional.</p>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Corte Estilo 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Corte Desvanecido</h5>
+                        <p class="card-text">Un estilo moderno con un desvanecido suave.</p>
+                        <p><strong>Tipo:</strong> Desvanecido</p>
+                        <p><strong>Descripción:</strong> Perfecto para un look fresco y contemporáneo.</p>
+                       
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Corte Estilo 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Corte Militar</h5>
+                        <p class="card-text">Un corte práctico y fácil de mantener.</p>
+                        <p><strong>Tipo:</strong> Militar</p>
+                        <p><strong>Descripción:</strong> Diseñado para un estilo de vida activo.</p>
+                       
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Corte Estilo 4">
+                    <div class="card-body">
+                        <h5 class="card-title">Corte de Cabello Largo</h5>
+                        <p class="card-text">Para quienes aman llevar el cabello largo.</p>
+                        <p><strong>Tipo:</strong> Largo</p>
+                        <p><strong>Descripción:</strong> Permite múltiples estilos y opciones de peinado.</p>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Corte Estilo 5">
+                    <div class="card-body">
+                        <h5 class="card-title">Corte de Barba</h5>
+                        <p class="card-text">Diseñado para realzar la apariencia de la barba.</p>
+                        <p><strong>Tipo:</strong> Barba</p>
+                        <p><strong>Descripción:</strong> Estilo que complementa tu corte de cabello.</p>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Corte Estilo 6">
+                    <div class="card-body">
+                        <h5 class="card-title">Corte Moderno</h5>
+                        <p class="card-text">Un estilo innovador y llamativo.</p>
+                        <p><strong>Tipo:</strong> Moderno</p>
+                        <p><strong>Descripción:</strong> Para quienes quieren destacar con un look único.</p>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2024 Barbería. Todos los derechos reservados.
+    </footer>
+
+</body>
+</html>
