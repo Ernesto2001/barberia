@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Cita</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+</head>
+<body>
+
+   <!-- Navbar -->
+   <nav class="navbar has-background-dark">
+    <div class="navbar-brand">
+        <a class="navbar-item has-text-white" href="{% url 'cliente' %}">Barbería Clásica</a>
+    </div>
+    <div class="navbar-menu">
+        <div class="navbar-end">
+            <div class="navbar-item has-text-white">
+                {% if request.session.user_id %}
+                    <span>{{ request.session.nombre }}</span>
+                {% else %}
+                    <span>Invitado</span>
+                {% endif %}
+            </div>
+            <div class="navbar-item">
+                <a class="button is-danger" href="{% url 'logout' %}">Cerrar sesión</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+    <!-- Formulario para agendar cita -->
+    <div class="container mt-5">
+        <div class="card">
+            <header class="card-header">
+                <p class="card-header-title">
+                    Agendar Nueva Cita
+                </p>
+            </header>
+            <div class="card-content">
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <!-- Ingresar nombre -->
+                    <div class="field">
+                        <label class="label">Nombre:</label>
+                        <div class="control">
+                            <input type="text" class="input" name="nombre" required>
+                        </div>
+                    </div>
+
+                    <!-- Ingresar correo -->
+                    <div class="field">
+                        <label class="label">Correo:</label>
+                        <div class="control">
+                            <input type="email" class="input" name="correo" required>
+                        </div>
+                    </div>
+
+                    <!-- Ingresar teléfono -->
+                    <div class="field">
+                        <label class="label">Teléfono:</label>
+                        <div class="control">
+                            <input type="text" class="input" name="telefono" required>
+                        </div>
+                    </div>
+
+                    <!-- Selector de tipo de servicio -->
+                    <div class="field">
+                        <label class="label">Tipo de Servicio:</label>
+                        <div class="control">
+                            <div class="select">
+                                <select name="tipo_servicio" required>
+                                    <option value="">Seleccione un servicio</option>
+                                    {% for tipo in tipos_servicio %}
+                                        <option value="{{ tipo.id_tiposervicio }}">{{ tipo.nombre }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Selector de fecha -->
+                    <div class="field">
+                        <label class="label">Fecha:</label>
+                        <div class="control">
+                            <input type="datetime-local" class="input" name="fecha" required>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <button type="submit" class="button is-primary">Agendar Cita</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -21,7 +21,13 @@
             bottom: 0;
             width: 100%;
         }
+        .card-img-top {
+    width: 100%;
+    height: 400px;
+    object-fit: cover; /* Mantiene la proporción de la imagen y la recorta si es necesario */
+}
     </style>
+    {% load static %}
 </head>
 <body>
 
@@ -33,85 +39,93 @@
                 <!-- Aquí puedes agregar más elementos si es necesario -->
             </ul>
             <ul class="navbar-nav ml-auto">  <!-- Alineación a la derecha -->
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a>
-                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'cliente' %}">{{ user.username }}</a> <!-- Mostrar nombre de usuario -->
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </nav>
 
     <!-- Contenido principal -->
     <div class="container mt-4">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
         <div class="row">
             <div class="col-md-4">
                 <div class="card">
-                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Corte Estilo 1">
+                    <img src="{% static 'imagenes/corte_clasico.jpg' %}" class="card-img-top" alt="Corte Estilo 1">
                     <div class="card-body">
                         <h5 class="card-title">Corte Clásico</h5>
                         <p class="card-text">Un corte atemporal que nunca pasa de moda.</p>
                         <p><strong>Tipo:</strong> Clásico</p>
                         <p><strong>Descripción:</strong> Ideal para quienes buscan un estilo limpio y profesional.</p>
-                        
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card">
-                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Corte Estilo 2">
+                    <img src="{% static 'imagenes/desvanecido.jpg' %}" class="card-img-top" alt="Corte Estilo 2">
                     <div class="card-body">
                         <h5 class="card-title">Corte Desvanecido</h5>
                         <p class="card-text">Un estilo moderno con un desvanecido suave.</p>
                         <p><strong>Tipo:</strong> Desvanecido</p>
                         <p><strong>Descripción:</strong> Perfecto para un look fresco y contemporáneo.</p>
-                       
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card">
-                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Corte Estilo 3">
+                    <img src="{% static 'imagenes/militar.jpg' %}" class="card-img-top" alt="Corte Estilo 3">
                     <div class="card-body">
                         <h5 class="card-title">Corte Militar</h5>
                         <p class="card-text">Un corte práctico y fácil de mantener.</p>
                         <p><strong>Tipo:</strong> Militar</p>
                         <p><strong>Descripción:</strong> Diseñado para un estilo de vida activo.</p>
-                       
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card">
-                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Corte Estilo 4">
+                    <img src="{% static 'imagenes/pelo_largo.jpg' %}" class="card-img-top" alt="Corte Estilo 4">
                     <div class="card-body">
                         <h5 class="card-title">Corte de Cabello Largo</h5>
                         <p class="card-text">Para quienes aman llevar el cabello largo.</p>
                         <p><strong>Tipo:</strong> Largo</p>
                         <p><strong>Descripción:</strong> Permite múltiples estilos y opciones de peinado.</p>
-                        
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card">
-                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Corte Estilo 5">
+                    <img src="{% static 'imagenes/barba.jpg' %}" class="card-img-top" alt="Corte Estilo 5">
                     <div class="card-body">
                         <h5 class="card-title">Corte de Barba</h5>
                         <p class="card-text">Diseñado para realzar la apariencia de la barba.</p>
                         <p><strong>Tipo:</strong> Barba</p>
                         <p><strong>Descripción:</strong> Estilo que complementa tu corte de cabello.</p>
-                        
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card">
-                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Corte Estilo 6">
+                    <img src="{% static 'imagenes/pelobrocoli.jpg' %}" class="card-img-top" alt="Corte Estilo 6">
                     <div class="card-body">
                         <h5 class="card-title">Corte Moderno</h5>
                         <p class="card-text">Un estilo innovador y llamativo.</p>
                         <p><strong>Tipo:</strong> Moderno</p>
                         <p><strong>Descripción:</strong> Para quienes quieren destacar con un look único.</p>
-                        
                     </div>
                 </div>
             </div>

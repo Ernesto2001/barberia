@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from tasks import views
 from django.shortcuts import redirect
 
@@ -37,5 +37,10 @@ urlpatterns = [
     path('admin_dashboard/', views.admin_dashboard_view, name='admin_dashboard'),
     path('menu/', views.menu_principal, name='menu_principal'),
     path('', lambda request: redirect('menu_principal', permanent=False)), 
+    path('ver-registro-admin/', views.ver_registro_admin, name='ver_registro_admin'),
+    path('ver_registro/', views.ver_registro, name='ver_registro'),
+    
+    
+
    
 ]

@@ -19,43 +19,39 @@
             width: 100%;
         }
         .card {
-            margin: 20px 0;
+            margin: 20px 0; /* Añade margen entre la tarjeta y el contenido */
         }
     </style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar is-dark">
-    <div class="navbar-brand">
-        <a class="navbar-item" href="{% url 'mi-admin' %}">Barbería Clásica</a>
-    </div>
-    <div class="navbar-menu">
-        <div class="navbar-start">
-            <a class="navbar-item" href="{% url 'admin_dashboard' %}">Dashboard</a>
-            <a class="navbar-item" href="{% url 'crear_usuario' %}">Crear Usuarios</a>
+   <!-- Navbar -->
+   <nav class="navbar has-background-dark">
+        <div class="navbar-brand">
+            <a class="navbar-item has-text-white" href="{% url 'cliente' %}">Barbería Clásica</a>
         </div>
-        <div class="navbar-end">
-            <div class="navbar-item has-text-white">
-                {% if request.session.user_id %}
-                    <span>{{ request.session.nombre }}</span>
-                {% else %}
-                    <span>Invitado</span>
-                {% endif %}
-            </div>
-            <div class="navbar-item">
-                <a class="button is-danger" href="{% url 'logout' %}">Cerrar sesión</a>
+        <div class="navbar-menu">
+            <div class="navbar-end">
+                <div class="navbar-item has-text-white">
+                    {% if request.session.user_id %}
+                        <span>{{ request.session.nombre }}</span>
+                    {% else %}
+                        <span>Invitado</span>
+                    {% endif %}
+                </div>
+                <div class="navbar-item">
+                    <a class="button is-danger" href="{% url 'logout' %}">Cerrar sesión</a>
+                </div>
             </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
     <div class="container mt-5">
         <h2 class="title is-2 has-text-centered mb-4">Registro de Citas</h2>
         
         <div id="citas" class="card">
             <div class="card-content">
-                <h5 class="title is-5">Listado de Citas Finalizadas</h5>
+                <h5 class="title is-5">Listado de Citas</h5>
                 <table class="table is-striped is-fullwidth" id="tablaCitas">
                     <thead>
                         <tr>
@@ -64,22 +60,20 @@
                             <th>Tipo de Servicio</th>
                             <th>Fecha</th>
                             <th>Estado</th>
-                            <th>Asignado a</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for cita in citas_finalizadas %}
+                        {% for cita in citas %}
                         <tr>
                             <td>{{ cita.creado_por.nombre }}</td>
                             <td>{{ cita.creado_por.apellido }}</td>
                             <td>{{ cita.id_tiposervicio.nombre }}</td>
                             <td>{{ cita.fecha }}</td>
                             <td>{{ cita.id_estado.nombre }}</td>
-                            <td>{{ cita.asignado_a.nombre }}</td>  <!-- Esta línea está correcta -->
                         </tr>
                         {% empty %}
                         <tr>
-                            <td colspan="6" class="has-text-centered">No hay citas registradas.</td>
+                            <td colspan="5" class="has-text-centered">No hay citas registradas.</td>
                         </tr>
                         {% endfor %}
                     </tbody>

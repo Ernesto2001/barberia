@@ -51,11 +51,11 @@
 </nav>
 
     <div class="container mt-5">
-        <h2 class="title is-2 has-text-centered mb-4">Registro de Citas</h2>
+        <h2 class="title is-2 has-text-centered mb-4">Registro de Citas Pendientes</h2>
         
         <div id="citas" class="card">
             <div class="card-content">
-                <h5 class="title is-5">Listado de Citas Finalizadas</h5>
+                <h5 class="title is-5">Listado de Citas Pendientes</h5>
                 <table class="table is-striped is-fullwidth" id="tablaCitas">
                     <thead>
                         <tr>
@@ -64,18 +64,21 @@
                             <th>Tipo de Servicio</th>
                             <th>Fecha</th>
                             <th>Estado</th>
-                            <th>Asignado a</th>
+                            <th>Asignar</th>  <!-- Columna de asignar -->
                         </tr>
                     </thead>
                     <tbody>
-                        {% for cita in citas_finalizadas %}
+                        {% for cita in citas %}
                         <tr>
                             <td>{{ cita.creado_por.nombre }}</td>
                             <td>{{ cita.creado_por.apellido }}</td>
                             <td>{{ cita.id_tiposervicio.nombre }}</td>
                             <td>{{ cita.fecha }}</td>
                             <td>{{ cita.id_estado.nombre }}</td>
-                            <td>{{ cita.asignado_a.nombre }}</td>  <!-- Esta línea está correcta -->
+                            <td>
+                                <!-- Botón sin funcionalidad -->
+                                <button class="button is-small is-primary">Asignar</button>
+                            </td>
                         </tr>
                         {% empty %}
                         <tr>

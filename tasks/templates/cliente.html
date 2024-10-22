@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cliente</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
     <style>
         body {
-            background-color: #f8f9fa;
+            background-color: #bec4ca;
+            padding-bottom: 60px; /* Espacio para el footer */
         }
         .card {
             margin: 10px;
@@ -21,47 +22,47 @@
             bottom: 0;
             width: 100%;
         }
-        .navbar .user-info {
-            margin-right: 20px;
-            color: white;
-        }
     </style>
 </head>
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="{% url 'menu_principal' %}">Barbería Clásica</a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item user-info">
-                    <span>{{ request.user.nombre }} {{ request.user.apellido }}</span>
-                </li>
-            </ul>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a>
-                </li>
-            </ul>
+    <nav class="navbar has-background-dark">
+        <div class="navbar-brand">
+            <a class="navbar-item has-text-white" href="{% url 'cliente' %}">Barbería Clásica</a>
+        </div>
+        <div class="navbar-menu">
+            <div class="navbar-end">
+                <div class="navbar-item has-text-white">
+                    {% if request.session.user_id %}
+                        <span>{{ request.session.nombre }}</span>
+                    {% else %}
+                        <span>Invitado</span>
+                    {% endif %}
+                </div>
+                <div class="navbar-item">
+                    <a class="button is-danger" href="{% url 'logout' %}">Cerrar sesión</a>
+                </div>
+            </div>
         </div>
     </nav>
 
     <!-- Contenido principal -->
     <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-6">
+        <div class="columns is-centered">
+            <div class="column is-half">
                 <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Agendar Cita</h5>
-                        <a href="{% url 'agendar_cita' %}" class="btn btn-primary">Agendar</a>
+                    <div class="card-content">
+                        <h5 class="title">Agendar Cita</h5>
+                        <a href="{% url 'agendarcita' %}" class="button is-primary">Agendar</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="column is-half">
                 <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Ver Registro de Citas</h5>
-                        <a href="{% url 'registro_citas' %}" class="btn btn-primary">Ver Registro</a>
+                    <div class="card-content">
+                        <h5 class="title">Ver Registro de Citas</h5>
+                        <a href="{% url 'ver_registro' %}" class="button is-primary">Ver Registro</a>
                     </div>
                 </div>
             </div>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Usuario</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <style>
         body {
             background-color: #f8f9fa;
@@ -13,9 +13,6 @@
             max-width: 600px;
             margin: auto;
             padding: 20px;
-            background-color: white;
-            border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         footer {
             background-color: #343a40;
@@ -27,99 +24,131 @@
             width: 100%;
         }
 
-        .alert {
-    transition: opacity 0.5s ease-out;
+        .notification {
+            transition: opacity 0.5s ease-out;
         }
 
-.alert.hidden {
-    opacity: 0;
-    visibility: hidden;
-}
+        .notification.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
     </style>
 </head>
 <body>
 
     <!-- Navbar del Admin -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="{% url 'mi-admin' %}">Barbería Clásica</a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'admin_dashboard' %}">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'crear_usuario' %}">Crear Usuarios</a>
-                </li>
-            </ul>
-            <span class="navbar-text text-white mr-3">
-                {{ usuario.nombre }} <!-- Cambia esto según cómo obtengas el nombre del usuario -->
-            </span>
-            <a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a>
+    <nav class="navbar is-dark">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="{% url 'mi-admin' %}">Barbería Clásica</a>
+        </div>
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="{% url 'admin_dashboard' %}">Dashboard</a>
+                <a class="navbar-item" href="{% url 'crear_usuario' %}">Crear Usuarios</a>
+            </div>
+            <div class="navbar-end">
+                <div class="navbar-item has-text-white">
+                    {% if request.session.user_id %}
+                        <span>{{ request.session.nombre }}</span>
+                    {% else %}
+                        <span>Invitado</span>
+                    {% endif %}
+                </div>
+                <div class="navbar-item">
+                    <a class="button is-danger" href="{% url 'logout' %}">Cerrar sesión</a>
+                </div>
+            </div>
         </div>
     </nav>
 
-     <!-- Mostrar mensajes -->
-     {% if messages %}
-     <div class="mt-4">
-         {% for message in messages %}
-             <div class="alert alert-{{ message.tags }}">
-                 {{ message }}
-             </div>
-         {% endfor %}
-     </div>
- {% endif %}
+    <!-- Mostrar mensajes -->
+    {% if messages %}
+    <div class="container mt-4">
+        {% for message in messages %}
+            <div class="notification is-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
 
- <script>
-    // Desaparecer mensajes después de 5 segundos
-    setTimeout(function() {
-        let messages = document.querySelectorAll('.alert');
-        messages.forEach(function(message) {
-            message.style.display = 'none';
-        });
-    }, 5000);  // 5000 milisegundos = 5 segundos
-</script>
-
-
+    <script>
+        // Desaparecer mensajes después de 5 segundos
+        setTimeout(function() {
+            let messages = document.querySelectorAll('.notification');
+            messages.forEach(function(message) {
+                message.style.display = 'none';
+            });
+        }, 5000);  // 5000 milisegundos = 5 segundos
+    </script>
 
     <!-- Contenido principal -->
-    <div class="container mt-4">
-        <h2>Crear Nuevo Usuario</h2>
-        <form method="POST" action="{% url 'crear_usuario' %}">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="nombre">Nombre:</label>
-                <input type="text" class="form-control" name="nombre" required>
+    <div class="container mt-5">
+        <div class="card">
+            <header class="card-header">
+                <p class="card-header-title">
+                    Crear Nuevo Usuario
+                </p>
+            </header>
+            <div class="card-content">
+                <form method="POST" action="{% url 'crear_usuario' %}">
+                    {% csrf_token %}
+                    <div class="field">
+                        <label class="label" for="nombre">Nombre:</label>
+                        <div class="control">
+                            <input type="text" class="input" name="nombre" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="apellido">Apellido:</label>
+                        <div class="control">
+                            <input type="text" class="input" name="apellido" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="correo">Correo:</label>
+                        <div class="control">
+                            <input type="email" class="input" name="correo" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="telefono">Teléfono:</label>
+                        <div class="control">
+                            <input type="text" class="input" name="telefono" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="usuario">Nombre de Usuario:</label>
+                        <div class="control">
+                            <input type="text" class="input" name="usuario" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="contrasena">Contraseña:</label>
+                        <div class="control">
+                            <input type="password" class="input" name="contrasena" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="rol">Rol:</label>
+                        <div class="control">
+                            <div class="select">
+                                <select name="rol" required>
+                                    {% for rol in roles %}
+                                    <option value="{{ rol.id_rol }}">{{ rol.nombre }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <button type="submit" class="button is-primary">Crear Usuario</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="apellido">Apellido:</label>
-                <input type="text" class="form-control" name="apellido" required>
-            </div>
-            <div class="form-group">
-                <label for="correo">Correo:</label>
-                <input type="email" class="form-control" name="correo" required>
-            </div>
-            <div class="form-group">
-                <label for="telefono">Teléfono:</label>
-                <input type="text" class="form-control" name="telefono" required>
-            </div>
-            <div class="form-group">
-                <label for="usuario">Nombre de Usuario:</label>
-                <input type="text" class="form-control" name="usuario" required>
-            </div>
-            <div class="form-group">
-                <label for="contrasena">Contraseña:</label>
-                <input type="password" class="form-control" name="contrasena" required>
-            </div>
-            <div class="form-group">
-                <label for="rol">Rol:</label>
-                <select class="form-control" name="rol" required>
-                    {% for rol in roles %}
-                    <option value="{{ rol.id_rol }}">{{ rol.nombre }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Crear Usuario</button>
-        </form>
+        </div>
     </div>
 
     <!-- Footer -->
